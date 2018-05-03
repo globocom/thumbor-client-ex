@@ -4,7 +4,7 @@ defmodule ThumborClient.Mixfile do
   def project do
     [
       app: :thumbor_client,
-      version: "0.2.0",
+      version: "0.3.0",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       deps: deps(),
@@ -36,7 +36,7 @@ defmodule ThumborClient.Mixfile do
       links: %{"GitHub" => "https://github.com/tacnoman/thumbor-client-ex"},
       files: [
         "lib/thumbor_client.ex",
-        "lib/thumbor_client_url.ex",
+        "lib/thumbor_client_url_builder.ex",
         "mix.exs",
         "README.md",
         "LICENSE",

@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.2.0]
+## [0.3.0] - 2018-05-03
+### Added
+- Tests
+- Support to filters
+
+## [0.2.0] - 2018-05-02
 ### Added
 - Support to smart images
 - New defmodule to manipulate the url

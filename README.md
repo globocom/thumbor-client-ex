@@ -9,7 +9,7 @@ The package can be installed by adding `thumbor_client` to your list of dependen
 ```elixir
 def deps do
   [
-    {:thumbor_client, "~> 0.2.0"}
+    {:thumbor_client, "~> 0.3.0"}
   ]
 end
 ```
