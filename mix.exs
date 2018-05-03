@@ -36,6 +36,7 @@ defmodule ThumborClient.Mixfile do
       links: %{"GitHub" => "https://github.com/tacnoman/thumbor-client-ex"},
       files: [
         "lib/thumbor_client.ex",
+        "lib/thumbor_client_url.ex",
         "mix.exs",
         "README.md",
         "LICENSE",

@@ -4,24 +4,39 @@ defmodule ThumborClient.Url do
   """
 
   def full_path(options) do
-    path = []
+    []
+    |> trim(options)
+    |> meta(options)
     |> sizes(options)
+    |> align(options, :halign)
+    |> align(options, :valign)
     |> smart(options)
     |> image(options)
+    |> Enum.join("/")
+  end
 
-    Enum.join(path, "/")
+  def trim(path, options) do
+    case options[:trim] do
+      nil -> path
+      true -> path ++ ["trim"]
+      trim -> path ++ ["trim:#{trim}"]
+    end
   end
 
   @doc """
-  Add url image when receive options[:image]
+  Add sizes to url image
 
   ## Examples
 
-  iex> ThumborClient.Url.image([], %{image: "path/to/image.jpg"})
-  ["path/to/image.jpg"]
+  iex> ThumborClient.Url.meta(["300x200"], %{meta: true})
+  ["300x200", "meta"]
   """
-  def image(path, options) do
-    path ++ [options[:image]]
+  def meta(path, options) do
+    case options[:meta] do
+      nil -> path
+      false -> path
+      _ -> path ++ ["meta"]
+    end
   end
 
   @doc """
@@ -40,7 +55,30 @@ defmodule ThumborClient.Url do
   end
 
   @doc """
-  Add url parameter smart to crop better images
+  Use orientation to crop image.
+
+  Parameters:
+  path: List with anothers attributes to build url
+  options: Could be: :top, :left, :center, :right, :bottom
+  orientation: Could be: :halign or :valign
+
+  ## Examples
+
+  iex> ThumborClient.Url.align(["300x200"], %{valign: :top}, :valign)
+  ["300x200", "top"]
+  """
+  def align(path, options, orientation) do
+    case options[orientation] do
+      nil -> path
+      false -> path
+      :center -> path
+      position -> path ++ [Atom.to_string(position)]
+    end
+  end
+
+  @doc """
+  Add url parameter smart to crop better images.
+  Thumbor has algorithms to crop using facial recognition process.
 
   ## Examples
 
@@ -48,10 +86,22 @@ defmodule ThumborClient.Url do
   ["300x200", "smart"]
   """
   def smart(path, options) do
-    if options[:smart] do
-      path ++ ["smart"]
-    else
-      path
+    case options[:smart] do
+      nil -> path
+      false -> path
+      _ -> path ++ ["smart"]
     end
+  end
+
+  @doc """
+  Add url image when receive options[:image]
+
+  ## Examples
+
+  iex> ThumborClient.Url.image([], %{image: "path/to/image.jpg"})
+  ["path/to/image.jpg"]
+  """
+  def image(path, options) do
+    path ++ [options[:image]]
   end
 end
