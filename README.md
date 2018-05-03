@@ -1,16 +1,15 @@
 # ThumborClient
 
-Thumbor client to Elixir Language.
+This package is a client to generate URLs to [Thumbor](https://github.com/thumbor/thumbor) using Elixir language.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `thumbor_client` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `thumbor_client` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:thumbor_client, "~> 0.1.0"}
+    {:thumbor_client, "~> 0.2.0"}
   ]
 end
 ```
@@ -34,7 +33,9 @@ iex> client.("%{image: "path/to/image.jpg", width: 500, height: 500})
 ```
 
 ### Another way to generate
-The method `client("key")` is recommended if you will generate multiple images in same method. If you prefer, you can call the method generate without this HOF.
+
+The method `client("key")` is recommended if you will generate multiple images in same function.
+If you prefer, you can call the method generate without this HOF.
 
 ```elixir
 iex> ThumborClient.generate(%{image: "image.jpg", width: 500, height: 500}, "my_secret_token")
@@ -43,6 +44,7 @@ iex> ThumborClient.generate(%{image: "image.jpg", width: 500, height: 500}, "my_
 
 ## Docs
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
+Documentation generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
+and published on [HexDocs](https://hexdocs.pm). The docs can
 be found at [https://hexdocs.pm/thumbor_client](https://hexdocs.pm/thumbor_client).
+
