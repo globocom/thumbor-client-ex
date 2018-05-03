@@ -3,6 +3,8 @@ defmodule ThumborClient do
   Documentation for ThumborClient.
   """
 
+  alias ThumborClient.Url
+
   def encrypt_to_thumbor(false, _path) do
     "unsafe"
   end
@@ -29,16 +31,32 @@ defmodule ThumborClient do
   ## Examples
 
   iex> client = ThumborClient.client("123")
-  iex> client.("500/500/image.jpg")
-  "VMKhXMULBn4h1UC52W3YliEgFfg=/500/500/image.jpg"
+  iex> client.(%{image: "image.jpg", width: 500, height: 400, smart: true})
+  "rFZk5DrMK2hKAwVMJU4O4ZYDpeI=/500x400/smart/image.jpg"
   """
   def client(secret \\ false) do
     my_secret = secret
 
-    fn(path) ->
-      encrypt_key = encrypt_to_thumbor(my_secret, path)
-
-      "#{encrypt_key}/#{path}"
+    fn(options) ->
+      ThumborClient.generate(options, my_secret)
     end
+  end
+
+  @doc """
+  Method to generate image passing parameters
+
+  ## Examples
+  iex> ThumborClient.generate(%{width: 200, height: 200, image: "my-image.jpg"}, "123")
+  "gliOovhxLB8RGXinV2YT_W607lw=/200x200/my-image.jpg"
+
+  OR
+  iex> ThumborClient.generate(%{width: 200, height: 200, image: "my-image.jpg"})
+  "unsafe/200x200/my-image.jpg"
+  """
+  def generate(options, secret \\ false) do
+    full_path = Url.full_path(options)
+    encrypt_key = encrypt_to_thumbor(secret, full_path)
+
+    "#{encrypt_key}/#{full_path}"
   end
 end

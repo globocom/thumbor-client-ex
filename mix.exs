@@ -8,7 +8,7 @@ defmodule ThumborClient.Mixfile do
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       deps: deps(),
-      package: package,
+      package: package(),
       description: "Client to use Thumbor to crop images in Elixir"
     ]
   end
