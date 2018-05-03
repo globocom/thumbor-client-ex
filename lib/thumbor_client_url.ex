@@ -15,6 +15,25 @@ defmodule ThumborClient.Url do
     |> Enum.join("/")
   end
 
+  @doc """
+  Removes surrounding space in images using top-left pixel color unless specified otherwise
+
+  Unless specified trim assumes the top-left pixel color and no tolerance (more on tolerance below).
+
+  To use it, just add a trim: true.
+
+  If you need to specify the orientation from where to get the pixel color, just use trim: "top-left" for the top-left pixel color, for example
+
+  Trim also supports color tolerance. The euclidian distance between the colors of the reference pixel and the surrounding pixels is used. If the distance is within the tolerance they'll get trimmed. For a RGB image the tolerance would be within the range 0-442. The tolerance can be specified like this: trim: "top-left:50"
+
+  ## Examples
+
+  iex> ThumborClient.Url.trim(["300x200"], %{trim: "bottom-left"})
+  ["300x200", "trim:bottom-left"]
+
+  iex> ThumborClient.Url.trim(["300x200"], %{trim: true})
+  ["300x200", "trim"]
+  """
   def trim(path, options) do
     case options[:trim] do
       nil -> path
@@ -24,7 +43,7 @@ defmodule ThumborClient.Url do
   end
 
   @doc """
-  Add sizes to url image
+  Instead of get the image, get all meta data informations in image returning using json
 
   ## Examples
 

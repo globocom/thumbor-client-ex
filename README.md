@@ -37,7 +37,7 @@ iex> client.("%{image: "path/to/image.jpg", width: 500, height: 500})
 The method `client("key")` is recommended if you will generate multiple images in same method. If you prefer, you can call the method generate without this HOF.
 
 ```elixir
-iex> ThumborClient.generate(${image: "image.jpg", width: 500, height: 500}, "my_secret_token")
+iex> ThumborClient.generate(%{image: "image.jpg", width: 500, height: 500}, "my_secret_token")
 # The last parameter is optional, if not exist should use unsafe mode
 ```
 

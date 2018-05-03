@@ -50,6 +50,7 @@ defmodule ThumborClient do
   "gliOovhxLB8RGXinV2YT_W607lw=/200x200/my-image.jpg"
 
   OR
+
   iex> ThumborClient.generate(%{width: 200, height: 200, image: "my-image.jpg"})
   "unsafe/200x200/my-image.jpg"
   """
