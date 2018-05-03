@@ -2,6 +2,7 @@ defmodule ThumborClientTest do
   use ExUnit.Case
 
   doctest ThumborClient
+  doctest ThumborClient.Url
   alias ThumborClient.Url
 
   @key "123"

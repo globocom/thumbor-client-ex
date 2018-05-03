@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add support to build url with smart parameter
 - Add support to get meta data from image
 - More tests
+- Add doctest to ThumborClient.Url
 
 ## [0.1.0] - 2018-05-02
 ### Added
