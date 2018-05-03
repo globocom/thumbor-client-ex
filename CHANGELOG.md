@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Tests
 - Support to filters
+- Add support to flip image
 
 ## [0.2.0] - 2018-05-02
 ### Added

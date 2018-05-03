@@ -98,13 +98,27 @@ defmodule ThumborClient.UrlBuilder do
   """
   def sizes(path, options) do
     if options[:width] && options[:height] do
-      width = options[:width]
-      height = options[:height]
+      width = flip(options[:width], options[:flip])
+      height = flip(options[:height], options[:flop])
 
       path ++ ["#{width}x#{height}"]
     else
       raise "The option 'width' and 'height' are required"
     end
+  end
+
+  @doc """
+  Function to flip values to int
+  If second parameter is true: value * -1
+
+  iex> ThumborClient.UrlBuilder.flip(10, true)
+  -10
+
+  iex> ThumborClient.UrlBuilder.flip(10, false)
+  10
+  """
+  def flip(size, flip \\ false) do
+    size * (if flip == true do -1 else 1 end)
   end
 
   @doc """
