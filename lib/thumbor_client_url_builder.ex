@@ -14,6 +14,7 @@ defmodule ThumborClient.UrlBuilder do
     |> align(options, :halign)
     |> align(options, :valign)
     |> smart(options)
+    |> filters(options)
     |> image(options)
     |> Enum.join("/")
   end
@@ -116,6 +117,23 @@ defmodule ThumborClient.UrlBuilder do
       nil -> path
       false -> path
       _ -> path ++ ["smart"]
+    end
+  end
+
+  @doc """
+  Adding filters to image. The option must be a List of strings.
+  You can see all filters in https://github.com/thumbor/thumbor/wiki/Filters
+
+  ## Examples
+
+  iex> ThumborClient.UrlBuilder.filters(["300x300"], %{filters: ["rotate(30)", "brightness(40)"]})
+  ["300x300", "filters:rotate(30):brightness(40)"]
+  """
+  def filters(path, options) do
+    case options[:filters] do
+      nil -> path
+      [] -> path
+      _filters -> path ++ [Enum.join(["filters"] ++ options[:filters], ":")]
     end
   end
 

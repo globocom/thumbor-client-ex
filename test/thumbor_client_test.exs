@@ -44,4 +44,9 @@ defmodule ThumborClientTest do
     options = %{width: 20, height: 10, image: @path, meta: true}
     assert ThumborClient.generate(options, @key) == "Mijch4AjWk86uc5tzfHS1ne9pXA=/meta/20x10/path/to/image.jpg"
   end
+
+  test "#generate with filter" do
+    options = %{width: 20, height: 10, image: @path, filters: ["rotate(90)"]}
+    assert ThumborClient.generate(options, @key) == "369I9wW_9-SfrWUmHgnrVoxbyiA=/20x10/filters:rotate(90)/path/to/image.jpg"
+  end
 end

@@ -68,6 +68,23 @@ defmodule ThumborClientUrlBuilderTest do
     assert UrlBuilder.smart(["10x10"], %{}) == ["10x10"]
   end
 
+  test "#filters with brightness" do
+    assert UrlBuilder.filters([], %{filters: ["brightness(40)"]}) == ["filters:brightness(40)"]
+  end
+
+  test "#filters empty" do
+    assert UrlBuilder.filters(["10x10"], %{filters: []}) == ["10x10"]
+  end
+
+  test "#filters without param" do
+    assert UrlBuilder.filters(["10x10"], %{}) == ["10x10"]
+  end
+
+  test "#filters with multiple params" do
+    assert UrlBuilder.filters(["10x10"], %{filters: ["blur(10)", "noise(20)", "rotate(45)"]}) ==
+      ["10x10", "filters:blur(10):noise(20):rotate(45)"]
+  end
+
   test "#image" do
     assert UrlBuilder.image(["10x10"], %{image: "sun.jpg"}) == ["10x10", "sun.jpg"]
   end
