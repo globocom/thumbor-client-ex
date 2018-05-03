@@ -3,6 +3,9 @@ defmodule ThumborClient.UrlBuilder do
   Module to build url with params
   """
 
+  @doc """
+  Get full path image passing options.
+  """
   def full_path(options) do
     []
     |> trim(options)
@@ -67,10 +70,14 @@ defmodule ThumborClient.UrlBuilder do
   ["300x200"]
   """
   def sizes(path, options) do
-    width = options[:width]
-    height = options[:height]
+    if options[:width] && options[:height] do
+      width = options[:width]
+      height = options[:height]
 
-    path ++ ["#{width}x#{height}"]
+      path ++ ["#{width}x#{height}"]
+    else
+      raise "The option 'width' and 'height' are required"
+    end
   end
 
   @doc """
@@ -121,6 +128,10 @@ defmodule ThumborClient.UrlBuilder do
   ["path/to/image.jpg"]
   """
   def image(path, options) do
-    path ++ [options[:image]]
+    if options[:image] do
+      path ++ [options[:image]]
+    else
+      raise "The option 'image' is required"
+    end
   end
 end

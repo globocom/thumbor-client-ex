@@ -32,6 +32,22 @@ defmodule ThumborClientUrlBuilderTest do
     assert UrlBuilder.meta(["10x10"], %{}) == ["10x10"]
   end
 
+  test "#sizes param with width and height" do
+    assert UrlBuilder.sizes([], %{width: 10, height: 20}) == ["10x20"]
+  end
+
+  test "#sizes raise error if option width is invalid" do
+    assert_raise RuntimeError, ~r/width|height/, fn ->
+      UrlBuilder.sizes([], %{height: 10})
+    end
+  end
+
+  test "#sizes raise error if option height is invalid" do
+    assert_raise RuntimeError, ~r/width|height/, fn ->
+      UrlBuilder.sizes([], %{width: 10})
+    end
+  end
+
   test "#align with nil value" do
     assert UrlBuilder.align(["10x10"], %{}, :valign) == ["10x10"]
   end
@@ -54,5 +70,11 @@ defmodule ThumborClientUrlBuilderTest do
 
   test "#image" do
     assert UrlBuilder.image(["10x10"], %{image: "sun.jpg"}) == ["10x10", "sun.jpg"]
+  end
+
+  test "#image raise error if option image is invalid" do
+    assert_raise RuntimeError, ~r/image/, fn ->
+      UrlBuilder.image([], %{})
+    end
   end
 end
