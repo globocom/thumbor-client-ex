@@ -3,6 +3,10 @@ defmodule ThumborClient do
   Documentation for ThumborClient.
   """
 
+  def encrypt_to_thumbor(false, _path) do
+    "unsafe"
+  end
+
   @doc """
   Encrypt to Thumbor. Thumbor requires an specific encryption to work.
   The encryption is a HMAC-SHA1 using the secret key setted in thumbor server and the path.
@@ -32,9 +36,9 @@ defmodule ThumborClient do
     my_secret = secret
 
     fn(path) ->
-      value = encrypt_to_thumbor(my_secret, path)
+      encrypt_key = encrypt_to_thumbor(my_secret, path)
 
-      "#{value}/#{path}"
+      "#{encrypt_key}/#{path}"
     end
   end
 end
