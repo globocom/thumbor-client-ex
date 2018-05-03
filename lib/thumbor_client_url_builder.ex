@@ -10,6 +10,7 @@ defmodule ThumborClient.UrlBuilder do
     []
     |> trim(options)
     |> meta(options)
+    |> fit_in(options)
     |> sizes(options)
     |> align(options, :halign)
     |> align(options, :valign)
@@ -59,6 +60,31 @@ defmodule ThumborClient.UrlBuilder do
       nil -> path
       false -> path
       _ -> path ++ ["meta"]
+    end
+  end
+
+  @doc """
+  The fit argument specifies that the image should not be auto-cropped and auto-resized to be EXACTLY the specified size,
+  and should be fit in an imaginary box of "E" width and "F" height, instead.
+
+  Possible params: [:fit_in, :adaptive_fit_in, :full_fit_in, :adaptive_full_fit_in]
+  Param in options: :fit
+
+  ## Example
+
+  iex> ThumborClient.UrlBuilder.fit_in(["200x200"], %{fit: :full_fit_in})
+  ["200x200", "full_fit_in"]
+  """
+  def fit_in(path, options) do
+    options_fit = [:fit_in, :adaptive_fit_in, :full_fit_in, :adaptive_full_fit_in]
+    fit = Enum.find(options_fit, fn(key) ->
+      options[:fit] == key
+    end)
+
+    if fit do
+      path ++ [Atom.to_string(fit)]
+    else
+      path
     end
   end
 

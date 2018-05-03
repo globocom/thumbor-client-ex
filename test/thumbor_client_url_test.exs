@@ -32,6 +32,30 @@ defmodule ThumborClientUrlBuilderTest do
     assert UrlBuilder.meta(["10x10"], %{}) == ["10x10"]
   end
 
+  test "#fit_in with empty value" do
+    assert UrlBuilder.fit_in([], %{}) == []
+  end
+
+  test "#fit_in with invalid value" do
+    assert UrlBuilder.fit_in([], %{fit: :invalid}) == []
+  end
+
+  test "#fit_in with fit_in" do
+    assert UrlBuilder.fit_in([], %{fit: :fit_in}) == ["fit_in"]
+  end
+
+  test "#fit_in with adaptive_fit_in" do
+    assert UrlBuilder.fit_in([], %{fit: :adaptive_fit_in}) == ["adaptive_fit_in"]
+  end
+
+  test "#fit_in with full_fit_in" do
+    assert UrlBuilder.fit_in([], %{fit: :full_fit_in}) == ["full_fit_in"]
+  end
+
+  test "#fit_in with adaptive_full_fit_in" do
+    assert UrlBuilder.fit_in([], %{fit: :adaptive_full_fit_in}) == ["adaptive_full_fit_in"]
+  end
+
   test "#sizes param with width and height" do
     assert UrlBuilder.sizes([], %{width: 10, height: 20}) == ["10x20"]
   end
