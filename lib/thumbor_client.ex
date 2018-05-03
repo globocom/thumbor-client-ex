@@ -3,14 +3,14 @@ defmodule ThumborClient do
   Documentation for ThumborClient.
   """
 
-  alias ThumborClient.Url
+  alias ThumborClient.UrlBuilder
 
   def encrypt_to_thumbor(false, _path) do
     "unsafe"
   end
 
   @doc """
-  Encrypt to Thumbor. Thumbor requires an specific encryption to work.
+  Thumbor requires an specific encryption to work.
   The encryption is a HMAC-SHA1 using the secret key setted in thumbor server and the path.
   After encrypt with HMAC-SHA1, must be encrypted with Base64 url_encode.
 
@@ -55,7 +55,7 @@ defmodule ThumborClient do
   "unsafe/200x200/my-image.jpg"
   """
   def generate(options, secret \\ false) do
-    full_path = Url.full_path(options)
+    full_path = UrlBuilder.full_path(options)
     encrypt_key = encrypt_to_thumbor(secret, full_path)
 
     "#{encrypt_key}/#{full_path}"

@@ -1,6 +1,6 @@
-defmodule ThumborClient.Url do
+defmodule ThumborClient.UrlBuilder do
   @moduledoc """
-  Module to create url with params
+  Module to build url with params
   """
 
   def full_path(options) do
@@ -28,10 +28,10 @@ defmodule ThumborClient.Url do
 
   ## Examples
 
-  iex> ThumborClient.Url.trim(["300x200"], %{trim: "bottom-left"})
+  iex> ThumborClient.UrlBuilder.trim(["300x200"], %{trim: "bottom-left"})
   ["300x200", "trim:bottom-left"]
 
-  iex> ThumborClient.Url.trim(["300x200"], %{trim: true})
+  iex> ThumborClient.UrlBuilder.trim(["300x200"], %{trim: true})
   ["300x200", "trim"]
   """
   def trim(path, options) do
@@ -47,7 +47,7 @@ defmodule ThumborClient.Url do
 
   ## Examples
 
-  iex> ThumborClient.Url.meta(["300x200"], %{meta: true})
+  iex> ThumborClient.UrlBuilder.meta(["300x200"], %{meta: true})
   ["300x200", "meta"]
   """
   def meta(path, options) do
@@ -63,7 +63,7 @@ defmodule ThumborClient.Url do
 
   ## Examples
 
-  iex> ThumborClient.Url.sizes([], %{width: 300, height: 200})
+  iex> ThumborClient.UrlBuilder.sizes([], %{width: 300, height: 200})
   ["300x200"]
   """
   def sizes(path, options) do
@@ -83,7 +83,7 @@ defmodule ThumborClient.Url do
 
   ## Examples
 
-  iex> ThumborClient.Url.align(["300x200"], %{valign: :top}, :valign)
+  iex> ThumborClient.UrlBuilder.align(["300x200"], %{valign: :top}, :valign)
   ["300x200", "top"]
   """
   def align(path, options, orientation) do
@@ -101,7 +101,7 @@ defmodule ThumborClient.Url do
 
   ## Examples
 
-  iex> ThumborClient.Url.smart(["300x200"], %{smart: true})
+  iex> ThumborClient.UrlBuilder.smart(["300x200"], %{smart: true})
   ["300x200", "smart"]
   """
   def smart(path, options) do
@@ -117,7 +117,7 @@ defmodule ThumborClient.Url do
 
   ## Examples
 
-  iex> ThumborClient.Url.image([], %{image: "path/to/image.jpg"})
+  iex> ThumborClient.UrlBuilder.image([], %{image: "path/to/image.jpg"})
   ["path/to/image.jpg"]
   """
   def image(path, options) do
