@@ -21,7 +21,7 @@ defmodule ThumborClient.UrlBuilder do
   end
 
   @doc """
-  Removes surrounding space in images using top-left pixel color unless specified otherwise
+  Removes surrounding space in image using top-left pixel color unless specified otherwise
 
   Unless specified trim assumes the top-left pixel color and no tolerance (more on tolerance below).
 
