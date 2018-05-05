@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/globocom/thumbor-client-ex.svg?branch=master)](https://travis-ci.org/globocom/thumbor-client-ex) [![HitCount](http://hits.dwyl.io/globocom/thumbor-client-ex.svg)](http://hits.dwyl.io/globocom/thumbor-client-ex)
+
 # ThumborClient
 
 This package is a client to generate URLs to [Thumbor](https://github.com/thumbor/thumbor) using Elixir language.
