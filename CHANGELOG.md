@@ -5,8 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.4.0] - 2018-05-05
 ### Added
 - Add fit param
+- Refactors
+- Add documentation of options in README file
 
 ## [0.3.0] - 2018-05-03
 ### Added
