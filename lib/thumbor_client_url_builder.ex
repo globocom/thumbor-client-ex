@@ -81,11 +81,7 @@ defmodule ThumborClient.UrlBuilder do
       options[:fit] == key
     end)
 
-    if fit do
-      path ++ [Atom.to_string(fit)]
-    else
-      path
-    end
+    if fit do path ++ [Atom.to_string(fit)] else path end
   end
 
   @doc """
@@ -97,13 +93,26 @@ defmodule ThumborClient.UrlBuilder do
   ["300x200"]
   """
   def sizes(path, options) do
-    if options[:width] && options[:height] do
-      width = flip(options[:width], options[:flip])
-      height = flip(options[:height], options[:flop])
+    [width, height] = sizes_transform(options)
+    path ++ ["#{width}x#{height}"]
+  end
 
-      path ++ ["#{width}x#{height}"]
-    else
-      raise "The option 'width' and 'height' are required"
+  def sizes_transform(options) do
+    [
+      size_transform(:width, options),
+      size_transform(:height, options)
+    ]
+  end
+
+  def size_transform(size_type, options) do
+    fill_size_value(options[size_type])
+    |> flip(options[if size_type == :width do :flip else :flop end])
+  end
+
+  def fill_size_value(size) do
+    case size do
+      nil -> 0
+      _size -> size
     end
   end
 

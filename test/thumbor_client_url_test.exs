@@ -60,16 +60,20 @@ defmodule ThumborClientUrlBuilderTest do
     assert UrlBuilder.sizes([], %{width: 10, height: 20}) == ["10x20"]
   end
 
-  test "#sizes raise error if option width is invalid" do
-    assert_raise RuntimeError, ~r/width|height/, fn ->
-      UrlBuilder.sizes([], %{height: 10})
-    end
+  test "#sizes width must be 0 if nil" do
+    assert UrlBuilder.sizes([], %{height: 10}) == ["0x10"]
   end
 
-  test "#sizes raise error if option height is invalid" do
-    assert_raise RuntimeError, ~r/width|height/, fn ->
-      UrlBuilder.sizes([], %{width: 10})
-    end
+  test "#sizes height must be 0 if nil" do
+    assert UrlBuilder.sizes([], %{width: 10}) == ["10x0"]
+  end
+
+  test "#sizes width should be negative if flip" do
+    assert UrlBuilder.sizes([], %{width: 10, flip: true, height: 10}) == ["-10x10"]
+  end
+
+  test "#sizes height should be negative if flop" do
+    assert UrlBuilder.sizes([], %{width: 10, flop: true, height: 10}) == ["10x-10"]
   end
 
   test "#align with nil value" do
