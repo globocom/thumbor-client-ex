@@ -33,7 +33,7 @@ defmodule ThumborClient.Mixfile do
     [
       maintainers: ["Tacnoman - Renato Cassino <renatocassino@gmail.com>"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/tacnoman/thumbor-client-ex"},
+      links: %{"GitHub" => "https://github.com/globocom/thumbor-client-ex"},
       files: [
         "lib/thumbor_client.ex",
         "lib/thumbor_client_url_builder.ex",
