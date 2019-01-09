@@ -12,6 +12,7 @@ defmodule ThumborClient.UrlBuilder do
     |> meta(options)
     |> fit_in(options)
     |> sizes(options)
+    |> crop(options)
     |> align(options, :halign)
     |> align(options, :valign)
     |> smart(options)
@@ -128,6 +129,23 @@ defmodule ThumborClient.UrlBuilder do
   """
   def flip(size, flip \\ false) do
     size * (if flip == true do -1 else 1 end)
+  end
+
+  @doc """
+  Manually specify crop window starting from top left coordinates
+  top left x, top left y : bottom right x, bottom right y
+
+  ## Examples
+
+  iex> ThumborClient.UrlBuilder.crop([], %{crop: [11, 12, 13, 14]})
+  ["11x12:13x14"]
+  """
+  def crop(path, options) do
+    case options[:crop] do
+      nil -> path
+      [] -> path
+      crop -> path ++ ["#{Enum.at(crop, 0)}x#{Enum.at(crop, 1)}:#{Enum.at(crop, 2)}x#{Enum.at(crop, 3)}"]
+    end
   end
 
   @doc """
